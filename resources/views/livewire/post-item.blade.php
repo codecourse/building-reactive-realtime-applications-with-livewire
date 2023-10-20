@@ -4,16 +4,26 @@
     </div>
     <div class="grow space-y-2">
         <div class="font-bold text-lg">{{ $post->user->name }}</div>
-        <div>
-            <p>{{ $post->body }}</p>
-        </div>
+        <div x-data="{ editing: false }" x-on:edit-cancel="editing = false">
+            <div class="space-y-4" x-show="!editing">
+                <p>{{ $post->body }}</p>
 
-        <div class="flex items-center space-x-2">
-            @can('delete', $post)
-                <div>
-                    <button class="text-indigo-500" wire:click="delete">Delete</button>
+                <div class="flex items-center space-x-2">
+                    @can('edit', $post)
+                        <div>
+                            <button class="text-indigo-500" x-on:click="editing = true">Edit</button>
+                        </div>
+                    @endcan
+                    @can('delete', $post)
+                        <div>
+                            <button class="text-indigo-500" wire:click="delete">Delete</button>
+                        </div>
+                    @endcan
                 </div>
-            @endcan
+            </div>
+            <div x-show="editing" x-cloak>
+                <livewire:edit-post :post="$post" />
+            </div>
         </div>
     </div>
 </div>
