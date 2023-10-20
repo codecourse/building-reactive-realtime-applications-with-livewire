@@ -27,6 +27,12 @@ class PostIndex extends Component
         return $this->page < count($this->chunks);
     }
 
+    #[On('echo:posts,PostCreated')]
+    public function prependPostFromBroadcast($payload)
+    {
+        $this->prependPost($payload['postId']);
+    }
+
     #[On('post.created')]
     public function prependPost($postId)
     {
