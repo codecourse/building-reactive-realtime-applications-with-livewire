@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class PostIndex extends Component
@@ -24,6 +25,16 @@ class PostIndex extends Component
     public function hasMorePages()
     {
         return $this->page < count($this->chunks);
+    }
+
+    #[On('post.created')]
+    public function prependPost($postId)
+    {
+        if (empty($this->chunks)) {
+            $this->chunks[] = [];
+        }
+
+        $this->chunks[0] = [$postId, ...$this->chunks[0]];
     }
 
     public function render()
