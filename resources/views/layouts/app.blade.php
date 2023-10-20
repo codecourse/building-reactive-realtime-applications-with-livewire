@@ -33,4 +33,6 @@
             </main>
         </div>
     </body>
+
+    @livewireScriptConfig
 </html>

@@ -3,7 +3,7 @@
         <img src="{{ $post->user->avatarUrl() }}" class="w-12 h-12 rounded-full">
     </div>
     <div class="grow space-y-2">
-        <div class="font-bold text-lg">{{ $post->id }}{{ $post->user->name }}</div>
+        <div class="font-bold text-lg">{{ $post->user->name }}</div>
         <div>
             <p>{{ $post->body }}</p>
         </div>
