@@ -10,6 +10,11 @@ class PostItem extends Component
 {
     public Post $post;
 
+    protected $listeners = [
+        'posts.{post.id}.updated' => '$refresh',
+        'echo:posts.{post.id},PostUpdated' => '$refresh'
+    ];
+
     public function delete()
     {
         $this->authorize('delete', $this->post);

@@ -9,7 +9,7 @@
                 <p>{{ $post->body }}</p>
 
                 <div class="flex items-center space-x-2">
-                    @can('edit', $post)
+                    @can('update', $post)
                         <div>
                             <button class="text-indigo-500" x-on:click="editing = true">Edit</button>
                         </div>
