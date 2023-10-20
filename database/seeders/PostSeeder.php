@@ -15,9 +15,9 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         Post::factory()
-            ->times(100)
+            ->times(1000)
             ->state(['user_id' => 1])
-            ->state(new Sequence(fn ($sequence) => ['created_at' => now()->addDay($sequence->index)]))
+            ->state(new Sequence(fn ($sequence) => ['created_at' => now()->subDay($sequence->index)]))
             ->create();
     }
 }

@@ -44,6 +44,7 @@ class PostIndex extends Component
     {
         foreach ($this->chunks as $index => $chunk) {
             if (($key = array_search($postId, $chunk)) !== false) {
+                $this->dispatch('chunk.' . $index . '.delete', $key);
                 unset($this->chunks[$index][$key]);
                 break;
             }
@@ -58,6 +59,8 @@ class PostIndex extends Component
         }
 
         $this->chunks[0] = [$postId, ...$this->chunks[0]];
+
+        $this->dispatch('chunk.0.prepend', $postId);
     }
 
     public function render()
