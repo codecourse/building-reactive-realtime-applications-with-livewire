@@ -33,6 +33,23 @@ class PostIndex extends Component
         $this->prependPost($payload['postId']);
     }
 
+    #[On('echo:posts,PostDeleted')]
+    public function deletePostFromBroadcast($payload)
+    {
+        $this->deletePost($payload['postId']);
+    }
+
+    #[On('post.deleted')]
+    public function deletePost($postId)
+    {
+        foreach ($this->chunks as $index => $chunk) {
+            if (($key = array_search($postId, $chunk)) !== false) {
+                unset($this->chunks[$index][$key]);
+                break;
+            }
+        }
+    }
+
     #[On('post.created')]
     public function prependPost($postId)
     {

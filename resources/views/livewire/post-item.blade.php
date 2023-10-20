@@ -7,5 +7,13 @@
         <div>
             <p>{{ $post->body }}</p>
         </div>
+
+        <div class="flex items-center space-x-2">
+            @can('delete', $post)
+                <div>
+                    <button class="text-indigo-500" wire:click="delete">Delete</button>
+                </div>
+            @endcan
+        </div>
     </div>
 </div>
